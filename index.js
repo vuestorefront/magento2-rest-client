@@ -20,11 +20,12 @@ const MAGENTO_API_VERSION = 'V1';
 module.exports.Magento2Client = function (options) {
     var instance = {
         addMethods (key, module) {
+            var client = RestClient(options);
             if (module) {
                 if (this[key])
-                    this[key] = Object.assign(this[key], module)
+                    this[key] = Object.assign(this[key], module(client))
                 else 
-                    this[key] = module
+                    this[key] = module(client)
             }
         }
     };
