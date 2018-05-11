@@ -1,0 +1,78 @@
+# Magento2 REST client
+
+This Node.js library enables JavaScript applications to communicate with Magento2 sites using their REST API.
+This module based on the magento2-rest-client module created by Marko Novak (2016).
+
+This module is used by the [Vue Storefront - first Progressive Web App for eCommerce](https://github.com/DivanteLtd/vue-storefront).
+
+**NOTE: the library is not finished yet! Only a subset of Magento2 API is currently implemented.**
+
+
+## Installation
+
+The library can be installed using the Npm package manager:
+
+```
+    npm install --save github:DivanteLtd/magento2-rest-client
+```
+
+## Usage
+
+The code sample below shows the usage of the library:
+
+```javascript
+    var Magento2Client = require('magento2-rest-client').Magento2Client;
+
+    var options = {
+          'url': 'http://www.test.com/index.php/rest',
+          'consumerKey': '<OAuth 1.0a consumer key>',
+          'consumerSecret': '<OAuth 1.0a consumer secret>',
+          'accessToken': '<OAuth 1.0a access token>',
+          'accessTokenSecret': '<OAuth 1.0a access token secret>'
+    };
+    var client = Magento2Client(options);
+    client.categories.list()
+        .then(function (categories) {
+            assert.equal(categories.parentId, 1);
+        })
+```
+
+You can extend the API by adding Your own modules or adding methods to the existing modules!
+```javascript
+    var Magento2Client = require('magento2-rest-client').Magento2Client;
+
+    var options = {
+          'url': 'http://www.test.com/index.php/rest',
+          'consumerKey': '<OAuth 1.0a consumer key>',
+          'consumerSecret': '<OAuth 1.0a consumer secret>',
+          'accessToken': '<OAuth 1.0a access token>',
+          'accessTokenSecret': '<OAuth 1.0a access token secret>'
+    };
+    var client = Magento2Client(options);
+
+    client.addMethod('categories', function (restClient) {
+            var module = {};
+            module.listEx = function () {
+                return restClient.get('/categories');
+            }
+            return module;
+        }
+    )
+
+    client.addMethod('newModule', function (restClient) {
+            var module = {};
+            module.newMethod = function () {
+                return restClient.post('/custom_magento_api_endpoint');
+            }
+            return module;
+        }
+    )
+
+    client.categories.listEx()
+        .then(function (categories) {
+            assert.equal(categories.parentId, 1);
+        })
+    client.newModule.newMethod()
+        .then(function (resultJson) {
+        })
+```
