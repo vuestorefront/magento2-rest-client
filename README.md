@@ -50,7 +50,7 @@ You can extend the API by adding Your own modules or adding methods to the exist
     };
     var client = Magento2Client(options);
 
-    client.addMethod('categories', function (restClient) {
+    client.addMethods('categories', function (restClient) {
             var module = {};
             module.listEx = function () {
                 return restClient.get('/categories');
@@ -59,7 +59,7 @@ You can extend the API by adding Your own modules or adding methods to the exist
         }
     )
 
-    client.addMethod('newModule', function (restClient) {
+    client.addMethods('newModule', function (restClient) {
             var module = {};
             module.newMethod = function () {
                 return restClient.post('/custom_magento_api_endpoint');
