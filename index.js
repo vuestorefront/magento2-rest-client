@@ -12,6 +12,7 @@ var taxRates = require('./lib/tax_rates');
 var taxRules = require('./lib/tax_rules');
 var stockItems = require('./lib/stock_items');
 var customers = require('./lib/customers');
+var directory = require('./lib/directory');
 var cart = require('./lib/cart');
 
 
@@ -45,6 +46,7 @@ module.exports.Magento2Client = function (options) {
     instance.taxRules = taxRules(client);
     instance.customers = customers(client);
     instance.cart = cart(client);
+    instance.directory = directory(client);
     
     return instance;
 }
