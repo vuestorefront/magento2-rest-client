@@ -14,7 +14,7 @@ var stockItems = require('./lib/stock_items');
 var customers = require('./lib/customers');
 var directory = require('./lib/directory');
 var cart = require('./lib/cart');
-
+var reviews = require('./lib/reviews');
 
 const MAGENTO_API_VERSION = 'V1';
 
@@ -48,6 +48,7 @@ module.exports.Magento2Client = function (options) {
     instance.customers = customers(client);
     instance.cart = cart(client);
     instance.directory = directory(client);
-    
+    instance.reviews = reviews(client);
+
     return instance;
 }
