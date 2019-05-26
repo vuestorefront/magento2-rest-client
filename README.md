@@ -76,3 +76,14 @@ You can extend the API by adding Your own modules or adding methods to the exist
         .then(function (resultJson) {
         })
 ```
+
+
+## Contributing
+
+### usefull resources
+
+Magento API with Swagger: https://devdocs.magento.com/swagger/
+
+Entry Page of REST API Documentation of Magento: https://devdocs.magento.com/guides/v2.3/rest/bk-rest.html
+filter response: https://devdocs.magento.com/guides/v2.3/rest/retrieve-filtered-responses.html
+
