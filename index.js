@@ -14,6 +14,7 @@ var stockItems = require('./lib/stock_items');
 var customers = require('./lib/customers');
 var directory = require('./lib/directory');
 var cart = require('./lib/cart');
+var orders = require('./lib/orders');
 var reviews = require('./lib/reviews');
 
 const MAGENTO_API_VERSION = 'V1';
@@ -47,6 +48,7 @@ module.exports.Magento2Client = function (options) {
     instance.taxRules = taxRules(client);
     instance.customers = customers(client);
     instance.cart = cart(client);
+    instance.orders = orders(client);
     instance.directory = directory(client);
     instance.reviews = reviews(client);
 
