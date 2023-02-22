@@ -18,8 +18,9 @@ var orders = require('./lib/orders');
 var reviews = require('./lib/reviews');
 
 const MAGENTO_API_VERSION = 'V1';
+const MAGENTO_BULK_API_VERSION = 'async/bulk/V1';
 
-module.exports.Magento2Client = function (options) {
+module.exports.Magento2Client = function (options, bulkOperation = false) {
     var instance = {
         addMethods (key, module) {
             var client = RestClient(options);
@@ -32,7 +33,8 @@ module.exports.Magento2Client = function (options) {
         }
     };
 
-    options.version = MAGENTO_API_VERSION;
+    options.version = bulkOperation ? MAGENTO_BULK_API_VERSION : MAGENTO_API_VERSION;
+    options.bulkOperation = bulkOperation;
     
     var client = RestClient(options);
 
